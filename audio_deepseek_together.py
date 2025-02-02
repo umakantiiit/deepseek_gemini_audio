@@ -23,7 +23,7 @@ generation_config = {
     "response_mime_type": "application/json"
 }
 
-# Prompts for the models (keep the same as original)
+# Prompts for the models
 Prompt_for_audio_transcript = '''
 You are an advanced AI assistant specialized in audio processing, speaker diarization, and emotion detection. Your expertise lies in analyzing audio files, identifying speakers, transcribing conversations, and detecting emotions in real-time. Your task is to process an audio file from a call center and provide a detailed, structured output in JSON format.
 Task:
@@ -86,14 +86,17 @@ Example Output:
   }
 }
 '''
+
 system_prompt_audio = '''You are a highly skilled AI assistant with a deep understanding of audio analysis, natural language processing, and emotional intelligence. You are meticulous, detail-oriented, and committed to delivering accurate and structured results. Your goal is to provide a comprehensive analysis of the call center audio, ensuring the transcript is clear, emotions are accurately detected, and the output is well-organized for further use.'''
+
 system_prompt_json = '''You are an AI trained in analyzing customer service call transcripts. Your expertise lies in emotion detection, summarization, and extracting key insights from conversations. You are meticulous, detail-oriented, and capable of providing structured outputs in JSON format.'''
+
 prompt_transcript_to_output = '''
 Analyze the provided JSON input, which contains a customer service call transcript with emotion labels for each speaker. Extract the following details and present them in a structured JSON format:
 	1- Emotion Tracking of Clients: A list of emotions expressed by the client (Speaker B) throughout the conversation.
 	2-Emotion Tracking of Agents: A list of emotions expressed by the agent (Speaker A) throughout the conversation.
 	3-Important Words Used in the Conversation: A list of key words or phrases that are significant to the conversation (e.g., billing, late fee, card expired, etc.).
-	4-Questions Asked by the Customer:ANALYSE THIS CAREFULLY.THIS SHOULD INCLUDE WHY A CLIENT CALLED CUSTOMER SERVICE.
+	4-Questions Asked by the Customer:ANALYSE THIS CAREFULLY.THIS SHOULD INCLUDE WHY A CLIENT CALLED CUSTOMER SERVICE.Donot just copy paste client exact conversation word.Use proper sentence to explain in points why client called the customer care.
 	5-Resolutions Given by the Agent: A list of resolutions or actions taken by the agent to address the client's concerns.
  	6-Suggestions For Agents:Analyse carefully what the customer asks and what are the response given by the agent.Then decide what better we can suggest the Agent to improve.
 	7-Important Conclusion and Summary of Conversation: A concise summary of the conversation, including the main issue, resolution, and any additional actions taken.
@@ -207,40 +210,19 @@ if st.session_state.get("transcript_json") is not None:
             messages=messages,
             model="deepseek-ai/DeepSeek-R1",
             temperature=0.2,
-            
             max_tokens=2048
         )
         
         try:
-        
             analysis_text = chat_completion.choices[0].message.content
             st.markdown(f"""
-    	    <div style='
-	 	background-color: #f8f9fa;
-        	border-radius: 5px;
-      
-        	padding: 20px;
-        	margin: 10px 0;
-        	white-space: pre-wrap;
-        	font-family: monospace;
-       	        border-left: 4px solid #4CAF50;
-    	     '>
-    	     <h4 style='color: #2c3e50; margin-top: 0;'>Detailed Analysis Report</h4>
-             <pre style='margin: 0;'>{analysis_text}</pre>
-             </div>
-             """, unsafe_allow_html=True)
-        	st.download_button(
-        	label="Download Analysis Report",
-        	data=analysis_text,
-        	file_name="analysis_report.txt",
-        	mime="text/plain"
-    		)
-
-            
+            <div style='background-color: #f8f9fa; border-radius: 5px; padding: 20px; margin: 10px 0; white-space: pre-wrap; font-family: monospace; border-left: 4px solid #4CAF50;'>
+                <h4 style='color: #2c3e50; margin-top: 0;'>Detailed Analysis Report</h4>
+                <pre style='margin: 0;'>{analysis_text}</pre>
+            </div>
+            """, unsafe_allow_html=True)
         except Exception as e:
-            st.error(f"Error processing response: {str(e)}")
-            st.write("Raw model output:")
-            st.text(chat_completion.choices[0].message.content)
+            st.error(f"Error in generating analysis: {str(e)}")
 
 # Clean up temporary files after session
 @st.cache_data()
