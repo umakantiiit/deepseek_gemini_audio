@@ -155,7 +155,7 @@ model_audio = genai.GenerativeModel(
     system_instruction=system_prompt_audio
 )
 
-st.title("Welcome to CurateAI Audio Assistant")
+st.title("Welcome to CurateAI Audio Assistant with Deepseek")
 
 # Placeholder for storing the first API call result
 transcript_json = None
