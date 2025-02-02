@@ -215,20 +215,21 @@ if st.session_state.get("transcript_json") is not None:
         
             analysis_text = chat_completion.choices[0].message.content
             st.markdown(f"""
-    <div style='
-        background-color: #f8f9fa;
-        border-radius: 5px;
-        padding: 20px;
-        margin: 10px 0;
-        white-space: pre-wrap;
-        font-family: monospace;
-        border-left: 4px solid #4CAF50;
-    '>
-    <h4 style='color: #2c3e50; margin-top: 0;'>Detailed Analysis Report</h4>
-    <pre style='margin: 0;'>{analysis_text}</pre>
-    </div>
-    """, unsafe_allow_html=True)
-        	st.download_button(
+    	    <div style='
+	 	background-color: #f8f9fa;
+        	border-radius: 5px;
+      
+        	padding: 20px;
+        	margin: 10px 0;
+        	white-space: pre-wrap;
+        	font-family: monospace;
+       	        border-left: 4px solid #4CAF50;
+    	     '>
+    	     <h4 style='color: #2c3e50; margin-top: 0;'>Detailed Analysis Report</h4>
+             <pre style='margin: 0;'>{analysis_text}</pre>
+             </div>
+             """, unsafe_allow_html=True)
+             st.download_button(
         	label="Download Analysis Report",
         	data=analysis_text,
         	file_name="analysis_report.txt",
