@@ -9,7 +9,7 @@ from groq import Groq
 genai.configure(api_key=st.secrets["gemini_api_key"])
 
 # Initialize Groq client
-Together_client = Groq(api_key=st.secrets["together_key"])
+Together_client = Together(api_key=st.secrets["together_key"])
 
 # Helper function to upload files to Gemini
 def upload_to_gemini(path, mime_type=None):
