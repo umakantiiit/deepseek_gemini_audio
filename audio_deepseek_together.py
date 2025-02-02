@@ -228,12 +228,12 @@ if st.session_state.get("transcript_json") is not None:
     <pre style='margin: 0;'>{analysis_text}</pre>
     </div>
     """, unsafe_allow_html=True)
-        st.download_button(
-        label="Download Analysis Report",
-        data=analysis_text,
-        file_name="analysis_report.txt",
-        mime="text/plain"
-    )
+        	st.download_button(
+        	label="Download Analysis Report",
+        	data=analysis_text,
+        	file_name="analysis_report.txt",
+        	mime="text/plain"
+    		)
 
             
         except Exception as e:
