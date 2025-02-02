@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+from together import Together
 import os
 from pathlib import Path
 import json
