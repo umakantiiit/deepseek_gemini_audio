@@ -151,7 +151,7 @@ Instructions:
 
 # Initialize the model for audio processing
 model_audio = genai.GenerativeModel(
-    model_name="gemini-1.5-flash-8b-001",
+    model_name="gemini-2.0-flash",
     system_instruction=system_prompt_audio
 )
 
