@@ -157,6 +157,7 @@ Example json output:
   Summary of the Conversation :
   Important word detected by the vendor:
 }
+'''
 
 # Initialize the model for audio processing
 model_audio = genai.GenerativeModel(
