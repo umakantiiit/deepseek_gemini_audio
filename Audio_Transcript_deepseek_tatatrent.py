@@ -114,6 +114,7 @@ Return the information in JSON format with the following structure:
 }
 },
 Summary of the whole Conversation:
+Any Complaint from the Customers:
 Important words detected by the Vendor:
 }"
 Example json output:
@@ -155,6 +156,7 @@ Example json output:
     }  
   }  
   Summary of the Conversation :
+  Any Complaint received from the customers:
   Important word detected by the vendor:
 }
 '''
