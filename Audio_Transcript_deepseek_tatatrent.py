@@ -219,7 +219,7 @@ if st.session_state.get("transcript_json") is not None:
         # Get completion from Groq
         chat_completion = Together_client.chat.completions.create(
             messages=messages,
-            model="deepseek-ai/DeepSeek-R1",
+            model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
             temperature=0.2,
             max_tokens=2048
         )
